@@ -20,7 +20,7 @@ import Home from './components/Home/Home';
 import './styles/styles.scss';
 
 /**
- * Renders the App, passing 2 children through the <Switch>, these will be passed down to be rendered at a lower level
+ * Renders the `App`, passing 2 children through the `<Switch>`, these will be passed down to be rendered at a lower level through the `App`
  */
 render((
   <Router>

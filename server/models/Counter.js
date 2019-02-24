@@ -1,7 +1,7 @@
 /*
  * Doctored by: Abaddon16
  * Document Function:
- *    Create the mongoose schema for mongoDB
+ *    Define the mongoose schema for Counter in the MongoDB
  */
 
 const mongoose = require('mongoose');

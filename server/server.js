@@ -1,3 +1,9 @@
+/*
+ * Doctored by: Abaddon16
+ * Document Function:
+ *    Implement server functionality (compile, render, route, auth, deliver)
+ */
+
 const express = require('express');
 const fs = require('fs');
 const historyApiFallback = require('connect-history-api-fallback');
@@ -13,24 +19,18 @@ const webpackConfig = require('../webpack.config');
 const isDev = process.env.NODE_ENV !== 'production';
 const port  = process.env.PORT || 8080;
 
-
-// Configuration
-// ================================================================================================
-
 // Set up Mongoose
-mongoose.connect(isDev ? config.db_dev : config.db);
+mongoose.connect(isDev?config.db_dev:config.db);
 mongoose.Promise = global.Promise;
 
+// Creates the Express application and sets it to use a url decoder & a JSON decoder
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// API routes
-require('./routes')(app);
+require('./routes')(app);// API routes
 
 if (isDev) {
   const compiler = webpack(webpackConfig);
-
   app.use(historyApiFallback({
     verbose: false
   }));
@@ -39,12 +39,9 @@ if (isDev) {
     publicPath: webpackConfig.output.publicPath,
     contentBase: path.resolve(__dirname, '../client/public'),
     stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false
+      colors: true, hash: false,
+      timings: true, chunks: false,
+      chunkModules: false, modules: false
     }
   }));
 
@@ -58,12 +55,9 @@ if (isDev) {
   });
 }
 
-app.listen(port, '0.0.0.0', (err) => {
-  if (err) {
-    console.log(err);
-  }
-
-  console.info('>>> 🌎 Open http://0.0.0.0:%s/ in your browser.', port);
+app.listen(port, '127.0.0.1', (err) => {
+  if (err) console.log(err);
+  console.info('>>> 🌎   Open http://127.0.0.1:%s/ in your browser.', port);
 });
 
 module.exports = app;

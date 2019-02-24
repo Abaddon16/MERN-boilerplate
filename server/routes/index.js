@@ -1,9 +1,14 @@
+/*
+ * Doctored by: Abaddon16
+ * Document Function:
+ *    Import all api files [require(x)]
+ */
+
 const fs = require('fs');
 const path = require('path');
 
 module.exports = (app) => {
-  // API routes
   fs.readdirSync(__dirname + '/api/').forEach((file) => {
-    require(`./api/${file.substr(0, file.indexOf('.'))}`)(app);
+    require(`./api/${file.substr(0, file.indexOf('.'))}`)(app);// API routes
   });
 };

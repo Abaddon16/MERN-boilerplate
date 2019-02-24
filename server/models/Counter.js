@@ -1,5 +1,10 @@
-const mongoose = require('mongoose');
+/*
+ * Doctored by: Abaddon16
+ * Document Function:
+ *    Create the mongoose schema for mongoDB
+ */
 
+const mongoose = require('mongoose');
 const CounterSchema = new mongoose.Schema({
   count: {
     type: Number,

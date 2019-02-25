@@ -27,7 +27,7 @@ render((
     <App>
       <Switch>
         <Route exact path="/" component={Home}/>{/* Exact pathing to {Home} because it's greedy matching, it will grab the first partial match if possible*/}
-        <Route component={NotFound}/>
+        <Route component={NotFound}/>{/* anything else*/}
       </Switch>
     </App>
   </Router>

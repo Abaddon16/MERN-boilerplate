@@ -31,3 +31,11 @@ npm run start:dev
 I've drafted up (mostly for my benefit, not yours) a couple documents about this repo
 - How the file structure is put together: [How it's Structured](How_its_Structured.md)
 - How the files interact: [How it all Works Together](How_it_Works.md)
+
+## What this does not do
+I haven't figured out:
+- How to connect to multiple databases
+  - How to connect with different connection strings?
+- How to manage multiple database connections
+- What routing actually means in React/Express
+    - I'm used to HTML/PHP, how does this transition to React/Express?

@@ -1,9 +1,7 @@
 /*
  * Doctored by: Abaddon16
- * Document Function:
- *    Import all api files [require(x)] one-by-one
+ * Document Function: Import all api files [require(x)] one-by-one
  */
-
 const fs = require('fs');
 const path = require('path');
 

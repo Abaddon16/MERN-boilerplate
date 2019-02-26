@@ -6,7 +6,6 @@
  */
 
 const express = require('express');
-//const fs = require('fs');
 const historyApiFallback = require('connect-history-api-fallback');// prevents some issues with people pressing refresh when webpages aren't meant to be directly refreshed
 const mongoose = require('mongoose');
 const path = require('path');
@@ -20,36 +19,21 @@ const webpackConfig = require('../webpack.config');
 const isDev = process.env.NODE_ENV !== 'production';
 const port  = process.env.PORT || 8080;
 
-// Connect, set up Mongoose
 mongoose.connect(isDev?config.db_dev:config.db);
 mongoose.Promise = global.Promise;
 
-/** 
- * The Express application; top-level function
- */ 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-/*
- * Imports the `routes` file, tells Express what to do with
- * items that come through with specific URIs
- */
 require('./routes')(app);
 
 if (isDev) {
   const compiler = webpack(webpackConfig);
   app.use(historyApiFallback({verbose: false}));
-  /**
-   * Enables
-   */
   app.use(webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
     contentBase: path.resolve(__dirname, '../client/public'),
-    stats: {
-      colors: true, hash: false,
-      timings: true, chunks: false,
-      chunkModules: false, modules: false
-    }
+    stats: {colors: true, hash: false, timings: true, chunks: false, chunkModules: false, modules: false}
   }));
 
   app.use(webpackHotMiddleware(compiler));

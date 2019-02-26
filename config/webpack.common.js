@@ -3,8 +3,12 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
-const helpers = require('./helpers');
+function root(args) {
+  args = Array.prototype.slice.call(arguments, 0);
+  return path.join.apply(path, [__dirname].concat('../', ...args));
+}
 
 const NODE_ENV = process.env.NODE_ENV;
 const isProd = NODE_ENV === 'production';
@@ -12,12 +16,12 @@ const isProd = NODE_ENV === 'production';
 module.exports = {
   entry: {
     'app': [
-      helpers.root('client/app/index.js')
+      root('client/app/index.js')
     ]
   },
 
   output: {
-    path: helpers.root('dist'),
+    path: root('dist'),
     publicPath: '/'
   },
 
@@ -33,7 +37,7 @@ module.exports = {
       // JS files
       {
         test: /\.jsx?$/,
-        include: helpers.root('client'),
+        include: root('client'),
         loader: 'babel-loader'
       },
 
@@ -75,7 +79,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      template: helpers.root('client/public/index.html'),
+      template: root('client/public/index.html'),
       inject: 'body'
     }),
 
@@ -85,7 +89,7 @@ module.exports = {
     }),
 
     new CopyWebpackPlugin([{
-      from: helpers.root('client/public')
+      from: root('client/public')
     }])
   ]
 };

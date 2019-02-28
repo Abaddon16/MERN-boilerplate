@@ -24,3 +24,5 @@ $RECYCLE.BIN/
 .Trashes
 
 package-lock\.json
+
+\.vscode/

@@ -1,7 +1,6 @@
 /*
  * Doctored by: Abaddon16
  * Document Function: Provide all the backend interaction code
- * TODO: Determine HOW it happens
  */
 
 const Counter = require('../../models/Counter');

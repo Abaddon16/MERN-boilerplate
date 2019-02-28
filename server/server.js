@@ -1,33 +1,25 @@
 /*
  * Doctored by: Abaddon16
  * Document Function:
- *    - Implement server functionality (compile, render, route, auth, deliver)
+ *    - Coalesce server functionality (compile, render, route, auth, deliver)
  *    - Start up the needed scripts
  */
 
-const express = require('express');
-const historyApiFallback = require('connect-history-api-fallback');// prevents some issues with people pressing refresh when webpages aren't meant to be directly refreshed
-const mongoose = require('mongoose');
+const express = require('express');//web applicaiton framework
+const historyApiFallback = require('connect-history-api-fallback');// prevents issues with refreshing webpages not meant to be directly refreshed
 const path = require('path');
-const webpack = require('webpack');// module bundler, bundles files into single `bundle.js`; shrinks code, minification
+const webpack = require('webpack');// module bundler, bundles files into single `*.js`; shrinks code, minification
 const webpackDevMiddleware = require('webpack-dev-middleware');// allows on-the-fly recompilation?
-const webpackHotMiddleware = require('webpack-hot-middleware');// allows hot reloading of your data on compilation events
+const webpackHotMiddleware = require('webpack-hot-middleware');// allows hot reloading of your data on compilation events?
+const webpackConfig = require('../webpack.config');//loads webpack.config which checks the environment variable and loads prod vs. dev
 
-const config = require('../config/config');
-const webpackConfig = require('../webpack.config');
-
-const isDev = process.env.NODE_ENV !== 'production';
-const port  = process.env.PORT || 8080;
-
-mongoose.connect(isDev?config.db_dev:config.db);
-mongoose.Promise = global.Promise;
-
+require('./db');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 require('./routes')(app);
 
-if (isDev) {
+if (process.env.NODE_ENV !== 'production') {
   const compiler = webpack(webpackConfig);
   app.use(historyApiFallback({verbose: false}));
   app.use(webpackDevMiddleware(compiler, {
@@ -46,6 +38,7 @@ if (isDev) {
   });
 }
 
+const port  = process.env.PORT || 8080;
 app.listen(port, '127.0.0.1', (err) => {
   if (err) console.log(err);
   console.info('>>> 🌎   Open http://127.0.0.1:%s/ in your browser.', port);

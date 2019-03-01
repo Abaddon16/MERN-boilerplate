@@ -3,12 +3,12 @@
 
 
 const mongoose = require('mongoose');
-const db=require('../db').larunaCM;
+const db = require('../db').larunaCM;
 
 const Schema = new mongoose.Schema({
-  name: {
-    type: String
-  }
+	name: {
+		type: String
+	}
 });
 Schema.set('versionKey', false);
 

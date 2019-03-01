@@ -1,6 +1,8 @@
 # MERN-boilerplate
 I forked this repo in the hope to boil down the required files to a minimum working example... I didn't realize it pretty much already was. Well. I have a repo of it now, and I plan to make it more commented and beginner friendly.
 
+I also plan on testing out ideas and adding more advanced functionality to the files as I learn, and I will attempt to minify that in time as well. I want to have this be modular in that each file can be inserted and removed as needed, that each file provides some plug-and-play functionality.
+
 This is a boilerplate project using the following major technologies:
 - [React](https://facebook.github.io/react/) and [React Router](https://reacttraining.com/react-router/) for the frontend
 - [Express](http://expressjs.com/) and [Mongoose](http://mongoosejs.com/) for the backend

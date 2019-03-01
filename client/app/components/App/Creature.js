@@ -4,44 +4,44 @@
  */
 import events from 'events';
 import React, { Component } from 'react';
-import CreatureInput from './CreatureInput';
+import CreatureInput from './CreatureInput_comp';
 
 class Creature extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {things: []};
-		this.newCreature=this.newCreature.bind(this);
-		this.updateCreatureList=this.updateCreatureList.bind(this);
+		this.state = { things: [] };
+		this.newCreature = this.newCreature.bind(this);
+		this.updateCreatureList = this.updateCreatureList.bind(this);
 	}
 	componentDidMount() {
 		this.updateCreatureList()
 	}
-	newCreature(name){
-	  	fetch(`/api/creatures/${name}/`, { method: 'POST' })
-			.then(res =>res.json())
+	newCreature(name) {
+		fetch(`/api/creatures/${name}/`, { method: 'POST' })
+			.then(res => res.json())
 		this.updateCreatureList();
 	}
-	updateCreatureList(){
+	updateCreatureList() {
 		fetch('/api/creatures')
-		  .then(res => res.json())
-		  .then(json => {
-			this.setState({things: json});
-		  });
+			.then(res => res.json())
+			.then(json => {
+				this.setState({ things: json });
+			});
 	}
 	render() {
 		return (
-		  <>
-			<p>Creatures:</p>
-			<ul>
-			  { this.state.things.map((thing, i) => (
-				<li key={i}>
-				  <span>{thing.name} </span>
-				</li>
-				))
-			  }
-			</ul>
-			<CreatureInput newCreature={this.newCreature} />
-		  </>
+			<>
+				<p>Creatures:</p>
+				<ul>
+					{this.state.things.map((thing, i) => (
+						<li key={i}>
+							<span>{thing.name} </span>
+						</li>
+					))
+					}
+				</ul>
+				<CreatureInput newCreature={this.newCreature} />
+			</>
 		);
 	}
 }

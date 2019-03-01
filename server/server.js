@@ -20,28 +20,28 @@ app.use(express.json());
 require('./routes')(app);
 
 if (process.env.NODE_ENV !== 'production') {
-  const compiler = webpack(webpackConfig);
-  app.use(historyApiFallback({verbose: false}));
-  app.use(webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    contentBase: path.resolve(__dirname, '../client/public'),
-    stats: {colors: true, hash: false, timings: true, chunks: false, chunkModules: false, modules: false}
-  }));
+	const compiler = webpack(webpackConfig);
+	app.use(historyApiFallback({ verbose: false }));
+	app.use(webpackDevMiddleware(compiler, {
+		publicPath: webpackConfig.output.publicPath,
+		contentBase: path.resolve(__dirname, '../client/public'),
+		stats: { colors: true, hash: false, timings: true, chunks: false, chunkModules: false, modules: false }
+	}));
 
-  app.use(webpackHotMiddleware(compiler));
-  app.use(express.static(path.resolve(__dirname, '../dist')));
+	app.use(webpackHotMiddleware(compiler));
+	app.use(express.static(path.resolve(__dirname, '../dist')));
 } else {
-  app.use(express.static(path.resolve(__dirname, '../dist')));
-  app.get('*', function (req, res) {
-    res.sendFile(path.resolve(__dirname, '../dist/index.html'));
-    res.end();
-  });
+	app.use(express.static(path.resolve(__dirname, '../dist')));
+	app.get('*', function (req, res) {
+		res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+		res.end();
+	});
 }
 
-const port  = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 app.listen(port, '127.0.0.1', (err) => {
-  if (err) console.log(err);
-  console.info('>>> 🌎   Open http://127.0.0.1:%s/ in your browser.', port);
+	if (err) console.log(err);
+	console.info('>>> 🌎   Open http://127.0.0.1:%s/ in your browser.', port);
 });
 
 module.exports = app;

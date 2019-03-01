@@ -3,9 +3,9 @@
  * Document Function: Provide all the backend interaction code
  */
 
-const Counter = require('../../models/Counter');
+const Counter=require('../../models/Counter');
 
-module.exports = (app) => {
+module.exports=(app) => {
 	/**
 	 * `GET`; returns the current list of counters
 	 * Non-destructive, returns the same every time
@@ -18,8 +18,8 @@ module.exports = (app) => {
 	 * `POST`; returns a new Counter object
 	 * Non-destructive, repeat submits create new w/ new _ids
 	 */
-	app.post('/api/counters', function (req, res, next) {
-		const counter = new Counter();
+	app.post('/api/counters', function(req, res, next) {
+		const counter=new Counter();
 		counter.save()
 			.then(() => res.json(counter)).catch((err) => next(err));
 	});
@@ -27,8 +27,8 @@ module.exports = (app) => {
 	 * `DELETE`; deletes specific _id's
 	 * Destructive
 	 */
-	app.delete('/api/counters/:id', function (req, res, next) {
-		Counter.findOneAndDelete({ _id: req.params.id }).exec()
+	app.delete('/api/counters/:id', function(req, res, next) {
+		Counter.findOneAndDelete({_id: req.params.id}).exec()
 			.then((counter) => res.json()).catch((err) => next(err));
 	});
 	/**

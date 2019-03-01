@@ -1,10 +1,10 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
+const webpack=require('webpack');
+const merge=require('webpack-merge');
 
-const helpers = require('./helpers');
-const commonConfig = require('./webpack.common');
+const helpers=require('./helpers');
+const commonConfig=require('./webpack.common');
 
-module.exports = merge(commonConfig, {
+module.exports=merge(commonConfig, {
 	mode: 'production',
 
 	output: {

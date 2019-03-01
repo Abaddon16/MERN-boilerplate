@@ -1,19 +1,19 @@
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
+const webpack=require('webpack');
+const autoprefixer=require('autoprefixer');
+const HtmlWebpackPlugin=require('html-webpack-plugin');
+const ExtractTextPlugin=require('extract-text-webpack-plugin');
+const CopyWebpackPlugin=require('copy-webpack-plugin');
+const path=require('path');
 
 function root(args) {
-	args = Array.prototype.slice.call(arguments, 0);
+	args=Array.prototype.slice.call(arguments, 0);
 	return path.join.apply(path, [__dirname].concat('../', ...args));
 }
 
-const NODE_ENV = process.env.NODE_ENV;
-const isProd = NODE_ENV === 'production';
+const NODE_ENV=process.env.NODE_ENV;
+const isProd=NODE_ENV==='production';
 
-module.exports = {
+module.exports={
 	entry: {
 		'app': [
 			root('client/app/index.js')

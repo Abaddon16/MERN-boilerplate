@@ -4,13 +4,11 @@
  */
 
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 const App=({children}) => (
 	<>
 		<main>
 			{children}
 		</main>
-		<Link to='/creatures'>Creatures</Link>
 	</>
 );
 

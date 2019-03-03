@@ -5,6 +5,7 @@ class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state={counters: []};
+		// binds the functions to the current context, so that the `this` inside those functions will always be used as expected
 		this.newCounter=this.newCounter.bind(this);
 		this.incrementCounter=this.incrementCounter.bind(this);
 		this.decrementCounter=this.decrementCounter.bind(this);
@@ -12,15 +13,15 @@ class Home extends Component {
 		this._modifyCounter=this._modifyCounter.bind(this);
 	}
 
-	componentDidMount() {
-		fetch('/api/counters')
+	componentDidMount() {// on the component being mounted to the page, do this
+		fetch('/api/counters')//HTTP GET request to this path, defined in /routes/api/counters.js
 			.then(res => res.json())
 			.then(json => {
-				this.setState({counters: json});
+				this.setState({counters: json});// set the state to the database's returned data
 			});
 	}
 	newCounter() {
-		fetch('/api/counters', {method: 'POST'})
+		fetch('/api/counters', {method: 'POST'})// designated a POST request
 			.then(res => res.json())
 			.then(json => {
 				let data=this.state.counters;
@@ -61,7 +62,7 @@ class Home extends Component {
 				<p>Counters:</p>
 				<ul>
 					{this.state.counters.map((counter, i) => (
-						<li key={i}>
+						<li key={i}>{/* key needed for React to be able to manage it's internal virtual DOM, must be unique among siblings */}
 							<span>{counter.count} </span>
 							<button onClick={() => this.incrementCounter(i)}>+</button>
 							<button onClick={() => this.decrementCounter(i)}>-</button>

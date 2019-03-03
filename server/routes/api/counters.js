@@ -1,6 +1,6 @@
 /*
  * Doctored by: Abaddon16
- * Document Function: Provide all the backend interaction code
+ * Document Function: What to do when an HTTP request of a given type comes to a given path
  */
 
 const Counter=require('../../models/Counter');
@@ -24,16 +24,14 @@ module.exports=(app) => {
 			.then(() => res.json(counter)).catch((err) => next(err));
 	});
 	/**
-	 * `DELETE`; deletes specific _id's
-	 * Destructive
+	 * `DELETE`; deletes specific _id's; Destructive
 	 */
 	app.delete('/api/counters/:id', function(req, res, next) {
 		Counter.findOneAndDelete({_id: req.params.id}).exec()
 			.then((counter) => res.json()).catch((err) => next(err));
 	});
 	/**
-	 * `PUT`; increments the specific counter _id
-	 * Destructive update
+	 * `PUT`; increments the specific counter _id; Destructive update
 	 */
 	app.put('/api/counters/:id/increment', (req, res, next) => {
 		Counter.findById(req.params.id).exec()
@@ -44,8 +42,7 @@ module.exports=(app) => {
 			}).catch((err) => next(err));
 	});
 	/**
-	 * `PUT`; increments the specific counter _id
-	 * Destructive update
+	 * `PUT`; increments the specific counter _id; Destructive update
 	 */
 	app.put('/api/counters/:id/decrement', (req, res, next) => {
 		Counter.findById(req.params.id).exec()

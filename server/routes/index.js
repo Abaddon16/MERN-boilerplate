@@ -1,9 +1,8 @@
 /*
  * Doctored by: Abaddon16
- * Document Function: Import all api files [require(x)] one-by-one
+ * Document Function: Import all api files via `require(x)` one-by-one
  */
 const fs=require('fs');
-const path=require('path');
 
 module.exports=(app) => {
 	fs.readdirSync(__dirname+'/api/').forEach((file) => {

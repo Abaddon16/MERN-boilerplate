@@ -18,7 +18,8 @@ import App from './components/App/App';
 import NotFound from './components/App/NotFound';
 import Home from './components/Home/Home';
 import './styles/styles.scss';
-import Creature from './components/App/Creature';
+import Creature from './components/App/CreatureList_comp';
+import CreatureDetail from './components/App/CreatureDetail_comp';
 
 // Renders the `App`, passing 2 children through the `<Switch>`, these will be passed down to be rendered at a lower level through the `App`
 render((
@@ -26,6 +27,7 @@ render((
 		<App>
 			<Switch>
 				<Route exact path="/" component={Home} />{/* Exact pathing to {Home} because it's greedy matching, it will grab the first partial match if possible*/}
+				<Route path='/creatures/:id' component={CreatureDetail} />
 				<Route path='/creatures' component={Creature} />
 				<Route component={NotFound} />{/* anything else, catch-all; must be last*/}
 			</Switch>

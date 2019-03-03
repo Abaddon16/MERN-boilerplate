@@ -5,11 +5,12 @@ const db=require('../db').larunaCM;
 const creature=new mongoose.Schema({
 	name: String,
 	type: String,
+	legacy: String,
 	size: String,
+	legacy_value: Number,
 	description: String,
 	habitat: String,
-	combat: String,
-	info: String,
+	additional_info: String,
 	attributes: {
 		STR: Number, AGI: Number,
 		END: Number, INT: Number,
@@ -30,12 +31,66 @@ const creature=new mongoose.Schema({
 	resistance: {
 		light: Number, dark: Number, calling: Number, change: Number, elements: Number
 	},
-	armor: {
-		impact: Number,
-		slashing: Number,
-		piercing: Number
+	armor: {//? Hindrance is a sum of all the below parts
+		impact: Number, slashing: Number, piercing: Number,
+		shield: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		},
+		gloves: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		},
+		boots: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		},
+		pauldrons: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		},
+		helm: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		},
+		coif: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		},
+		cuirass: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		},
+		chest: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		},
+		legs: {
+			name: String,
+			type: String,
+			impact: Number, slashing: Number, piercing: Number,
+			hindrance: Number
+		}
 	},
-	known_spells: {type: Array, "default": []},
+	//* Allows the array to initially be undefined and thereby allow it to not be saved if it's empty
+	//? May need to use `known_spells=known_spells||[]` before doing a push to prevent errors
+	known_spells: {type: Array, default: void 0},
 	skills: {
 		academics: {
 			skill: Number, //this is added to all the advanced skills as part of their bonus

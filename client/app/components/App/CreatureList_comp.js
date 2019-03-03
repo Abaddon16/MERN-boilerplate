@@ -4,6 +4,7 @@
  */
 
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import CreatureInput from './CreatureInput_comp';
 
 class Creature extends Component {
@@ -16,15 +17,11 @@ class Creature extends Component {
 	componentDidMount() {
 		this.updateCreatureList()
 	}
-	newCreature(name) {
-		fetch(`/api/creatures/${name}/`,
+	newCreature(creature) {
+		fetch(`/api/creatures/${creature.name}/`,
 			{
 				method: 'POST',
-				body: JSON.stringify(//! needs to be defined the same as the `/models/Creatures.js` model
-					{// TODO: Creatures comp - Find a way to use the Mongoose model here instead of having to remodel it over again here
-						name: name,
-						type: name
-					}),
+				body: JSON.stringify(creature),//! needs to be defined the same as the `/models/Creatures.js` model
 				headers: {"Content-Type": "application/json"}
 			})
 			.then(res => res.json())
@@ -43,9 +40,7 @@ class Creature extends Component {
 				<p>Creatures:</p>
 				<ul>
 					{this.state.things.map((thing, i) => (
-						<li key={i}>
-							<span>{thing.name} </span>
-						</li>
+						<li key={i}> <Link to={`/creatures/`+thing._id} params={{id: thing._id}}>{thing.name}</Link></li>
 					))
 					}
 				</ul>
